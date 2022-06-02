@@ -1,17 +1,17 @@
 import datetime as dt
 
 
-class Record:
+class Record: # Нет докстрингов к классам и функциям
     def __init__(self, amount, comment, date=''):
         self.amount = amount
         self.date = (
-            dt.datetime.now().date() if
+            dt.datetime.now().date() if # Не верно написаны переносы для if
             not
             date else dt.datetime.strptime(date, '%d.%m.%Y').date())
         self.comment = comment
 
 
-class Calculator:
+class Calculator: 
     def __init__(self, limit):
         self.limit = limit
         self.records = []
@@ -41,10 +41,10 @@ class Calculator:
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):  # Получает остаток калорий на сегодня
         x = self.limit - self.get_today_stats()
-        if x > 0:
+        if x > 0: # Нельзя использовать бэкслэши в f строках
             return f'Сегодня можно съесть что-нибудь' \
                    f' ещё, но с общей калорийностью не более {x} кКал'
-        else:
+        else:# Можно не писать else а просто return в функции
             return('Хватит есть!')
 
 
@@ -66,16 +66,19 @@ class CashCalculator(Calculator):
             cash_remained == 1.00
             currency_type = 'руб'
         if cash_remained > 0:
-            return (
+            return ( # Нельзя использовать операции в f строках 
                 f'На сегодня осталось {round(cash_remained, 2)} '
                 f'{currency_type}'
             )
         elif cash_remained == 0:
             return 'Денег нет, держись'
-        elif cash_remained < 0:
+        elif cash_remained < 0:# Не использовать бэкслэши в f строчках
             return 'Денег нет, держись:' \
                    ' твой долг - {0:.2f} {1}'.format(-cash_remained,
                                                      currency_type)
 
-    def get_week_stats(self):
-        super().get_week_stats()
+    def get_week_stats(self): # Можно не переопределять он автоматически наследуется
+        super().get_week_stats() # Если не переопределять то будет работать без super
+
+
+# Нет  if __name__ == "__main__":
